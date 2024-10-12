@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Película{% endblock %}
+
+{% block content %}
+
+{% if success %}
+    <div id="success-message" class="alert alert-success" role="alert">
+        Película creada con éxito.
+    </div>
+{% endif %}
+
+    <h2>Crear Nueva Película</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+
+    <!-- Script para desaparecer el mensaje de éxito después de 3 segundos -->
+    <script>
+        setTimeout(function() {
+            var successMessage = document.getElementById('success-message');
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000); // 3000 milisegundos = 3 segundos
+    </script>
+{% endblock %}

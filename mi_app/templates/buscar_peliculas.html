@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Buscar Películas{% endblock %}
+
+{% block content %}
+    <h2>Buscar Películas</h2>
+    <form method="GET">
+        <div class="mb-3">
+            <label for="q_titulo" class="form-label">Título:</label>
+            <input type="text" name="q_titulo" id="q_titulo" placeholder="Buscar por título" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="q_genero" class="form-label">Género:</label>
+            <input type="text" name="q_genero" id="q_genero" placeholder="Buscar por género" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="q_anio" class="form-label">Año:</label>
+            <input type="number" name="q_anio" id="q_anio" placeholder="Buscar por año" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        <!-- Botón para volver a mostrar el listado completo -->
+        <a href="{% url 'buscar_peliculas' %}" class="btn btn-secondary ms-3">Listado Completo</a>
+    </form>
+
+    <h3>Resultados:</h3>
+    <ul>
+        {% for pelicula in peliculas %}
+            <li>{{ pelicula.titulo }} ({{ pelicula.anio }}) - {{ pelicula.genero }}</li>
+        {% empty %}
+            <li>No se encontraron resultados</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
