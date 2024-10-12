@@ -429,6 +429,7 @@ button,
 [type=reset],
 [type=submit] {
   -webkit-appearance: button;
+  appearance: button; /* Propiedad estándar para navegadores modernos */
 }
 button:not(:disabled),
 [type=button]:not(:disabled),
@@ -487,6 +488,7 @@ legend + * {
 [type=search] {
   outline-offset: -2px;
   -webkit-appearance: textfield;
+  appearance: textfield; /* Propiedad estándar para navegadores modernos */
 }
 
 /* rtl:raw:
@@ -508,6 +510,7 @@ legend + * {
 ::file-selector-button {
   font: inherit;
   -webkit-appearance: button;
+  appearance: button; /* Propiedad estándar para navegadores modernos */
 }
 
 output {
