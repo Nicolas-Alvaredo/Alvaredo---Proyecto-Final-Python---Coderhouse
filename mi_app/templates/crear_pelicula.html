@@ -17,13 +17,13 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
 
-    <!-- Script para desaparecer el mensaje de éxito después de 3 segundos -->
+    <!-- Script para desaparecer el mensaje de éxito después de 2 segundos -->
     <script>
         setTimeout(function() {
             var successMessage = document.getElementById('success-message');
             if (successMessage) {
                 successMessage.style.display = 'none';
             }
-        }, 3000); // 3000 milisegundos = 3 segundos
+        }, 2000); // 2000 milisegundos = 2 segundos
     </script>
 {% endblock %}
