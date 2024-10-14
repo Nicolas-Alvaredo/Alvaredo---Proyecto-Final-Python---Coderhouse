@@ -19,8 +19,10 @@ Es recomendable trabajar en un entorno virtual para evitar conflictos con otras 
 En **Windows**:
 
 bash
+
 python -m venv .venv
-.venv\Scripts\activate
+
+.venv/Scripts/activate
 
 ### 2. Instalar las dependencias
 
@@ -33,6 +35,7 @@ pip install -r requirements.txt
 Django necesita crear las tablas necesarias en la base de datos. Ejecuta los siguientes comandos:
 
 python manage.py makemigrations
+
 python manage.py migrate
 
 ### 4. Ejecutar el servidor

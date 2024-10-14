@@ -13,9 +13,21 @@
     <h2>Crear Nueva Película</h2>
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título:</label>
+            {{ form.titulo }}
+        </div>
+        <div class="mb-3">
+            <label for="genero" class="form-label">Género:</label>
+            {{ form.genero }}
+        </div>
+        <div class="mb-3">
+            <label for="anio" class="form-label">Año:</label>
+            {{ form.anio }} <!-- A pesar de que la variable en el código es "anio", puedes mostrar "Año" aquí -->
+        </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
+    
 
     <!-- Script para desaparecer el mensaje de éxito después de 2 segundos -->
     <script>
