@@ -20,29 +20,42 @@ En **Windows**:
 
 bash
 
+```bash
 python -m venv .venv
+```
 
+```bash
 .venv/Scripts/activate
+```
 
 ### 2. Instalar las dependencias
 
 Instala todas las dependencias necesarias para ejecutar la aplicación:
 
+```bash
 pip install -r requirements.txt
+```
 
 ### 3. Migrar la base de datos
 
 Django necesita crear las tablas necesarias en la base de datos. Ejecuta los siguientes comandos:
 
+```bash
 python manage.py makemigrations
 
+```
+
+```bash
 python manage.py migrate
+```
 
 ### 4. Ejecutar el servidor
 
 Inicia el servidor de desarrollo de Django:
 
+```bash
 python manage.py runserver
+```
 
 ### 5. Funcionalidades principales
 
