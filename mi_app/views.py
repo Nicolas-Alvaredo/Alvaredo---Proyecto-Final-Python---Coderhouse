@@ -4,7 +4,7 @@ from .models import Pelicula
 
 # Vista para la página de inicio
 def inicio(request):
-    return render(request, 'inicio.html')
+    return render(request, 'mi_app/inicio.html')
 
 # Vista para crear una nueva película
 def crear_pelicula(request):
@@ -17,7 +17,7 @@ def crear_pelicula(request):
             form = PeliculaForm()  # Reiniciar el formulario para que quede vacío
     else:
         form = PeliculaForm()
-    return render(request, 'crear_pelicula.html', {'form': form, 'success': success})
+    return render(request, 'mi_app/crear_pelicula.html', {'form': form, 'success': success})
 
 
 # Vista para buscar películas
@@ -40,9 +40,9 @@ def buscar_peliculas(request):
     if anio_query:
         peliculas = peliculas.filter(anio=anio_query)
     
-    return render(request, 'buscar_peliculas.html', {'peliculas': peliculas})
+    return render(request, 'mi_app/buscar_peliculas.html', {'peliculas': peliculas})
 
 
 # Vista para la página "Acerca de mí"
 def acerca_de_mi(request):
-    return render(request, 'acerca_de_mi.html')
+    return render(request, 'mi_app/acerca_de_mi.html')
