@@ -18,9 +18,14 @@
             <input type="number" name="q_anio" id="q_anio" placeholder="Buscar por año" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Buscar</button>
-        <!-- Botón para volver a mostrar el listado completo -->
         <a href="{% url 'buscar_peliculas' %}" class="btn btn-secondary ms-3">Listado Completo</a>
     </form>
+
+    {% if error_message %}
+    <div id="error-message" class="alert alert-danger" role="alert">
+        {{ error_message }}
+    </div>
+    {% endif %}
 
     <h3>Resultados:</h3>
     <ul>
@@ -30,4 +35,14 @@
             <li>No se encontraron resultados</li>
         {% endfor %}
     </ul>
+
+    <!-- Script para ocultar mensajes de alerta después de 2 segundos -->
+    <script>
+        setTimeout(function() {
+            var errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+        }, 2000);
+    </script>
 {% endblock %}

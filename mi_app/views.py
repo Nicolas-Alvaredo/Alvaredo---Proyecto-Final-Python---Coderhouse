@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import PeliculaForm
 from .models import Pelicula
+from django.core.exceptions import ValidationError
+
 
 # Vista para la página de inicio
 def inicio(request):
@@ -9,15 +11,27 @@ def inicio(request):
 # Vista para crear una nueva película
 def crear_pelicula(request):
     success = False
+    error_message = None  # Para almacenar mensajes de error
+    form = PeliculaForm()  # Inicializamos el formulario para solicitudes GET
+
     if request.method == 'POST':
         form = PeliculaForm(request.POST)
         if form.is_valid():
-            form.save()
-            success = True  # Indicar que la película fue creada con éxito
-            form = PeliculaForm()  # Reiniciar el formulario para que quede vacío
-    else:
-        form = PeliculaForm()
-    return render(request, 'mi_app/crear_pelicula.html', {'form': form, 'success': success})
+            try:
+                form.save()  # Intentar guardar la película
+                success = True  # Película creada con éxito
+                form = PeliculaForm()  # Reiniciar el formulario
+            except ValidationError as e:
+                # Capturar el mensaje de error del modelo
+                error_message = e.messages[0]  # Mostrar solo el primer mensaje de error
+        else:
+            error_message = 'El año no puede ser negativo.'  # Manejar formulario no válido
+
+    return render(request, 'mi_app/crear_pelicula.html', {
+        'form': form,
+        'success': success,
+        'error_message': error_message
+    })
 
 
 # Vista para buscar películas
@@ -25,7 +39,8 @@ def buscar_peliculas(request):
     titulo_query = request.GET.get('q_titulo')
     genero_query = request.GET.get('q_genero')
     anio_query = request.GET.get('q_anio')
-    
+    error_message = None
+
     peliculas = Pelicula.objects.all()
 
     # Filtrar por título
@@ -38,9 +53,19 @@ def buscar_peliculas(request):
     
     # Filtrar por año
     if anio_query:
-        peliculas = peliculas.filter(anio=anio_query)
-    
-    return render(request, 'mi_app/buscar_peliculas.html', {'peliculas': peliculas})
+        try:
+            anio = int(anio_query)
+            if anio < 0:
+                raise ValueError('El año no puede ser negativo.')
+            peliculas = peliculas.filter(anio=anio)
+        except ValueError as e:
+            error_message = str(e)
+
+    return render(request, 'mi_app/buscar_peliculas.html', {
+        'peliculas': peliculas,
+        'error_message': error_message
+    })
+
 
 
 # Vista para la página "Acerca de mí"

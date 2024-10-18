@@ -3,12 +3,17 @@
 {% block title %}Crear Película{% endblock %}
 
 {% block content %}
+    {% if success %}
+        <div id="success-message" class="alert alert-success" role="alert">
+            Película creada con éxito.
+        </div>
+    {% endif %}
 
-{% if success %}
-    <div id="success-message" class="alert alert-success" role="alert">
-        Película creada con éxito.
-    </div>
-{% endif %}
+    {% if error_message %}
+        <div id="error-message" class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
 
     <h2>Crear Nueva Película</h2>
     <form method="POST">
@@ -23,19 +28,18 @@
         </div>
         <div class="mb-3">
             <label for="anio" class="form-label">Año:</label>
-            {{ form.anio }} <!-- A pesar de que la variable en el código es "anio", puedes mostrar "Año" aquí -->
+            {{ form.anio }}
         </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
-    
 
-    <!-- Script para desaparecer el mensaje de éxito después de 2 segundos -->
+    <!-- Script para ocultar los mensajes después de 2 segundos -->
     <script>
         setTimeout(function() {
+            var errorMessage = document.getElementById('error-message');
             var successMessage = document.getElementById('success-message');
-            if (successMessage) {
-                successMessage.style.display = 'none';
-            }
-        }, 2000); // 2000 milisegundos = 2 segundos
+            if (errorMessage) errorMessage.style.display = 'none';
+            if (successMessage) successMessage.style.display = 'none';
+        }, 2000);
     </script>
 {% endblock %}
