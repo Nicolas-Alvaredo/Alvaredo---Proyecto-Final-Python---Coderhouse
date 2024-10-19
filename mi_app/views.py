@@ -7,6 +7,7 @@ from .forms import PeliculaForm
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Inicio CBV
 class InicioView(TemplateView):
@@ -17,7 +18,7 @@ class AcercaDeMiView(TemplateView):
     template_name = 'mi_app/acerca_de_mi.html'
 
 # Buscar Peliculas CBV
-class PeliculaListView(ListView):
+class PeliculaListView(LoginRequiredMixin, ListView):
     model = Pelicula
     template_name = 'mi_app/buscar_peliculas.html'
     context_object_name = 'peliculas'
@@ -47,7 +48,7 @@ class PeliculaDetailView(DetailView):
     context_object_name = 'pelicula'
 
 # Crear Peliculas CBV
-class PeliculaCreateView(TemplateView):
+class PeliculaCreateView(LoginRequiredMixin, TemplateView):
     template_name = 'mi_app/crear_pelicula.html'
 
     def get(self, request, *args, **kwargs):

@@ -29,19 +29,42 @@
                 Menu <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'inicio' %}">Inicio</a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'pelicula-create' %}">Crear Película</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'pelicula-list' %}">Buscar Películas</a>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'pelicula-create' %}">Crear Película</a>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'pelicula-list' %}">Buscar Películas</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'acerca_de_mi' %}">Acerca de</a>
                     </li>
+                </ul>
+
+                <!-- Botones de Inicio / Registro o Cierre de Sesión -->
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <form method="POST" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger nav-link px-3 py-2">
+                                    Cerrar Sesión
+                                </button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item mx-0 mx-lg-1">
+                            <a class="btn btn-primary nav-link px-3 py-2" href="{% url 'login' %}">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1 ms-2">
+                            <a class="btn btn-success nav-link px-3 py-2" href="{% url 'register' %}">Registrarse</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -54,14 +77,14 @@
         {% endblock %}
     </div>
 
-    <!-- Footer-->
+    <!-- Footer -->
     <footer class="footer text-center">
         <div class="container">
             <p>© 2024 Mi Sitio de Películas</p>
         </div>
     </footer>
 
-    <!-- Bootstrap core JS-->
+    <!-- Bootstrap core JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'mi_app/js/scripts.js' %}"></script>
 </body>
