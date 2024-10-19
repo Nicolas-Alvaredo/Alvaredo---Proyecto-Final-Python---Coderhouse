@@ -1,4 +1,3 @@
-# models.py
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -11,11 +10,11 @@ class Pelicula(models.Model):
         return f"{self.titulo} ({self.anio})"
 
     def clean(self):
-        # Validación: El año no debe ser negativo
+        """Validación personalizada para evitar años negativos."""
         if self.anio < 0:
-            raise ValidationError('El año no puede ser negativo.')
+            raise ValidationError({'anio': 'El año no puede ser negativo.'})
 
     def save(self, *args, **kwargs):
-        # Aplicar validaciones antes de guardar
-        self.full_clean()  # Asegura que se ejecute la validación personalizada
+        """Valida y guarda la película."""
+        self.full_clean()  # Ejecuta la validación personalizada
         super().save(*args, **kwargs)

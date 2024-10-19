@@ -18,7 +18,7 @@
             <input type="number" name="q_anio" id="q_anio" placeholder="Buscar por año" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Buscar</button>
-        <a href="{% url 'buscar_peliculas' %}" class="btn btn-secondary ms-3">Listado Completo</a>
+        <a href="{% url 'pelicula-list' %}" class="btn btn-secondary ms-3">Listado Completo</a>
     </form>
 
     {% if error_message %}
@@ -30,13 +30,20 @@
     <h3>Resultados:</h3>
     <ul>
         {% for pelicula in peliculas %}
-            <li>{{ pelicula.titulo }} ({{ pelicula.anio }}) - {{ pelicula.genero }}</li>
+            <li>
+                {{ pelicula.titulo }} ({{ pelicula.anio }}) - {{ pelicula.genero }}
+                <a href="{% url 'pelicula-detail' pelicula.pk %}">Ver más</a> |
+                <a href="{% url 'pelicula-update' pelicula.pk %}">Editar</a> |
+                <a href="{% url 'pelicula-delete' pelicula.pk %}"
+                   onclick="return confirm('¿Estás seguro de que deseas eliminar esta película?');">
+                    Eliminar
+                </a>
+            </li>
         {% empty %}
             <li>No se encontraron resultados</li>
         {% endfor %}
     </ul>
 
-    <!-- Script para ocultar mensajes de alerta después de 2 segundos -->
     <script>
         setTimeout(function() {
             var errorMessage = document.getElementById('error-message');

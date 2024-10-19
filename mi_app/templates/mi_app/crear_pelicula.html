@@ -3,16 +3,27 @@
 {% block title %}Crear Película{% endblock %}
 
 {% block content %}
-    {% if success %}
-        <div id="success-message" class="alert alert-success" role="alert">
-            Película creada con éxito.
-        </div>
+
+    <!-- Mostrar mensajes de éxito -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div id="success-message" class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
-    {% if error_message %}
-        <div id="error-message" class="alert alert-danger" role="alert">
-            {{ error_message }}
-        </div>
+    <!-- Mostrar mensajes de error -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div id="error-message" class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
     <h2>Crear Nueva Película</h2>
@@ -33,13 +44,14 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
 
-    <!-- Script para ocultar los mensajes después de 2 segundos -->
+    <!-- Script para desaparecer los mensajes después de 2 segundos -->
     <script>
-        setTimeout(function() {
-            var errorMessage = document.getElementById('error-message');
+        setTimeout(function () {
             var successMessage = document.getElementById('success-message');
-            if (errorMessage) errorMessage.style.display = 'none';
+            var errorMessage = document.getElementById('error-message');
             if (successMessage) successMessage.style.display = 'none';
-        }, 2000);
+            if (errorMessage) errorMessage.style.display = 'none';
+        }, 2000);  // 2 segundos
     </script>
+
 {% endblock %}

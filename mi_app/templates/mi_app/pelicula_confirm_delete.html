@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Película{% endblock %}
+
+{% block content %}
+    <h2>¿Estás seguro de que deseas eliminar "{{ object.titulo }}"?</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Sí, eliminar</button>
+        <a href="{% url 'buscar_peliculas' %}">Cancelar</a>
+    </form>
+{% endblock %}

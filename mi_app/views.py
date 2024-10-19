@@ -1,73 +1,63 @@
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.contrib import messages  # Importar mensajes
 from django.shortcuts import render, redirect
-from .forms import PeliculaForm
 from .models import Pelicula
+from .forms import PeliculaForm
 from django.core.exceptions import ValidationError
 
+class InicioView(TemplateView):
+    template_name = 'mi_app/inicio.html'
 
-# Vista para la página de inicio
-def inicio(request):
-    return render(request, 'mi_app/inicio.html')
+class AcercaDeMiView(TemplateView):
+    template_name = 'mi_app/acerca_de_mi.html'
 
-# Vista para crear una nueva película
-def crear_pelicula(request):
-    success = False
-    error_message = None  # Para almacenar mensajes de error
-    form = PeliculaForm()  # Inicializamos el formulario para solicitudes GET
+class PeliculaListView(ListView):
+    model = Pelicula
+    template_name = 'mi_app/buscar_peliculas.html'
+    context_object_name = 'peliculas'
 
-    if request.method == 'POST':
+class PeliculaDetailView(DetailView):
+    model = Pelicula
+    template_name = 'mi_app/pelicula_detail.html'
+
+class PeliculaCreateView(TemplateView):
+    template_name = 'mi_app/crear_pelicula.html'
+
+    def get(self, request, *args, **kwargs):
+        form = PeliculaForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
         form = PeliculaForm(request.POST)
         if form.is_valid():
             try:
-                form.save()  # Intentar guardar la película
-                success = True  # Película creada con éxito
-                form = PeliculaForm()  # Reiniciar el formulario
+                form.save()
+                messages.success(request, "Película creada con éxito.")  # Mensaje de éxito
+                return redirect('pelicula-create')  # Redirigir para limpiar el formulario
             except ValidationError as e:
-                # Capturar el mensaje de error del modelo
-                error_message = e.messages[0]  # Mostrar solo el primer mensaje de error
+                error_message = e.message_dict.get('anio', ['Error inesperado'])[0]
+                messages.error(request, error_message)  # Mensaje de error
+
         else:
-            error_message = 'El año no puede ser negativo.'  # Manejar formulario no válido
+            # Agregar errores del formulario a los mensajes de error
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, error)  # Mostrar cada error como un mensaje separado
 
-    return render(request, 'mi_app/crear_pelicula.html', {
-        'form': form,
-        'success': success,
-        'error_message': error_message
-    })
+        return render(request, self.template_name, {'form': form})
 
+class PeliculaUpdateView(UpdateView):
+    model = Pelicula
+    form_class = PeliculaForm
+    template_name = 'mi_app/crear_pelicula.html'
+    success_url = reverse_lazy('pelicula-list')
 
-# Vista para buscar películas
-def buscar_peliculas(request):
-    titulo_query = request.GET.get('q_titulo')
-    genero_query = request.GET.get('q_genero')
-    anio_query = request.GET.get('q_anio')
-    error_message = None
+class PeliculaDeleteView(DeleteView):
+    model = Pelicula
+    template_name = 'mi_app/pelicula_confirm_delete.html'
+    success_url = reverse_lazy('pelicula-list')
 
-    peliculas = Pelicula.objects.all()
-
-    # Filtrar por título
-    if titulo_query:
-        peliculas = peliculas.filter(titulo__icontains=titulo_query)
-    
-    # Filtrar por género
-    if genero_query:
-        peliculas = peliculas.filter(genero__icontains=genero_query)
-    
-    # Filtrar por año
-    if anio_query:
-        try:
-            anio = int(anio_query)
-            if anio < 0:
-                raise ValueError('El año no puede ser negativo.')
-            peliculas = peliculas.filter(anio=anio)
-        except ValueError as e:
-            error_message = str(e)
-
-    return render(request, 'mi_app/buscar_peliculas.html', {
-        'peliculas': peliculas,
-        'error_message': error_message
-    })
-
-
-
-# Vista para la página "Acerca de mí"
-def acerca_de_mi(request):
-    return render(request, 'mi_app/acerca_de_mi.html')
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "Película eliminada con éxito.")
+        return super().delete(request, *args, **kwargs)
