@@ -79,6 +79,35 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+
+/* Ajustes customizados navbar */
+
+#mainNav {
+  padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-link {
+  font-size: 0.9rem;  /* Reducir tamaño de la fuente */
+  padding: 0.5rem 0.8rem;  /* Reducir padding */
+}
+
+.navbar-brand {
+  font-size: 1.2rem;
+}
+
+img.rounded-circle {
+  object-fit: cover;
+}
+
+@media (max-width: 992px) {
+  .navbar-nav .nav-link {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.6rem;
+  }
+}
+
+
+
 /* Ajustes customizados inicio */
 
 /* Asegura que el body y html ocupen el 100% de la altura */
