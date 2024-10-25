@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Mensaje
 
-# Register your models here.
+# Registramos el modelo directamente
+admin.site.register(Mensaje)
+
