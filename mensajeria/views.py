@@ -11,15 +11,13 @@ class EnviarMensajeView(LoginRequiredMixin, CreateView):
     model = Mensaje
     form_class = MensajeForm
     template_name = 'mensajeria/enviar_mensaje.html'
-    success_url = reverse_lazy('mensajeria:ver_mensajes')
 
     def form_valid(self, form):
         mensaje = form.save(commit=False)
-        mensaje.remitente = self.request.user  # Asignar remitente al usuario logueado
+        mensaje.remitente = self.request.user  # Asignar remitente
         mensaje.save()
-        messages.success(self.request, 'Mensaje enviado con éxito.')
-        # Redirigir con parámetro GET en la URL
-        return redirect(f"{self.success_url}?enviado=True")
+        # Redirigir con un parámetro GET para mostrar el mensaje solo en 'ver_mensajes'
+        return redirect(f"{reverse_lazy('mensajeria:ver_mensajes')}?enviado=True")
 
 
 class VerMensajesView(LoginRequiredMixin, ListView):
@@ -27,14 +25,14 @@ class VerMensajesView(LoginRequiredMixin, ListView):
     context_object_name = 'recibidos'
 
     def get_queryset(self):
-        # Mensajes recibidos, ordenados del más reciente al más antiguo
         return Mensaje.objects.filter(destinatario=self.request.user).order_by('-fecha_envio')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Mensajes enviados, ordenados del más reciente al más antiguo
+        # Agregar mensajes enviados al contexto
         context['enviados'] = Mensaje.objects.filter(remitente=self.request.user).order_by('-fecha_envio')
-        context['mensaje_exito'] = self.request.GET.get('enviado', False)  # Mensaje de éxito opcional
+        # Verificar si el mensaje de éxito debe mostrarse
+        context['mensaje_exito'] = self.request.GET.get('enviado', False)
         return context
     
 class EliminarMensajeView(LoginRequiredMixin, DeleteView):
