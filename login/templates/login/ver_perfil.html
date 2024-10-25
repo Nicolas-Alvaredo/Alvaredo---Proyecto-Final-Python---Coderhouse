@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil de {{ perfil.user.username }}{% endblock %}
+
+{% block content %}
+    <h2>Perfil de {{ perfil.user.username }}</h2>
+
+    <p><strong>Email:</strong> {{ perfil.user.email }}</p>
+    <p><strong>Nombre:</strong> {{ perfil.user.first_name }}</p>
+    <p><strong>Apellido:</strong> {{ perfil.user.last_name }}</p>
+    <p><strong>Fecha de Nacimiento:</strong> {{ perfil.fecha_nacimiento|default:"No especificada" }}</p>
+    <p><strong>Biografía:</strong> {{ perfil.biografia|default:"Sin biografía" }}</p>
+
+    {% if perfil.avatar %}
+        <img src="{{ perfil.avatar.url }}" alt="Avatar" style="max-width: 150px;">
+    {% else %}
+        <p>No hay avatar disponible.</p>
+    {% endif %}
+
+    <a href="{% url 'login:editar_perfil' %}" class="btn btn-primary mt-3">Editar Perfil</a>
+{% endblock %}

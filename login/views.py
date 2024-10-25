@@ -1,11 +1,12 @@
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, EditarPerfilForm
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import DatosExtra
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+
 
 # Vista de registro usando CBV
 class RegisterView(CreateView):
@@ -26,32 +27,44 @@ class CustomLoginView(LoginView):
 # Vista de logout usando CBV
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('mi_app:inicio')
+    
+# Vista de detalle de Usuario usando CBV  
+class VerPerfilView(LoginRequiredMixin, DetailView):
+    model = DatosExtra
+    template_name = 'login/ver_perfil.html'
+    context_object_name = 'perfil'
+
+    def get_object(self):
+        # Asegura que cada usuario tenga un perfil y lo devuelve
+        return DatosExtra.objects.get_or_create(user=self.request.user)[0]
 
 # Vista de edición de perfil usando CBV
 class EditarPerfilView(LoginRequiredMixin, UpdateView):
     template_name = 'login/editar_perfil.html'
     form_class = EditarPerfilForm
-    success_url = reverse_lazy('mi_app:inicio')
+    success_url = reverse_lazy('login:ver_perfil')
 
     def get_object(self):
-        # Obtiene el usuario actual y crea DatosExtra si no existe
+        # Asegura que el objeto DatosExtra exista para el usuario
         user = self.request.user
-        DatosExtra.objects.get_or_create(user=user)  # Asegura que DatosExtra exista
+        DatosExtra.objects.get_or_create(user=user)
         return user
 
+    def get_form_kwargs(self):
+        # Pasar el usuario al formulario
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
-        # Guarda el avatar si fue subido
-        avatar = form.cleaned_data.get('avatar')
-        if avatar:
-            datos_extra = get_object_or_404(DatosExtra, user=self.request.user)
-            datos_extra.avatar = avatar
-            datos_extra.save()
+        # Guardar los datos adicionales si fueron proporcionados
         return super().form_valid(form)
+
     
 # Vista para cambiar contraseña usando CBV
 class CambiarPasswordView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'login/cambiar_password.html'
-    success_url = reverse_lazy('mi_app:inicio')  # Redirigir al inicio
+    success_url = reverse_lazy('login:ver_perfil')  # Redirigir al inicio
 
     def form_valid(self, form):
         """Envía mensaje de éxito y redirige al inicio."""

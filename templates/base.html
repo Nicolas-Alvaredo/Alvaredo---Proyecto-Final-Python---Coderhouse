@@ -49,7 +49,7 @@
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item d-flex align-items-center mx-2">
-                            <a class="nav-link d-flex align-items-center" href="{% url 'login:editar_perfil' %}">
+                            <a class="nav-link d-flex align-items-center" href="{% url 'login:ver_perfil' %}">
                                 {% if user.datosextra.avatar %}
                                     <img src="{{ user.datosextra.avatar.url }}" alt="Avatar"
                                          class="rounded-circle me-2" height="30" width="30">
