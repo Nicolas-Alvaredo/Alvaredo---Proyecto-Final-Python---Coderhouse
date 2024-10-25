@@ -61,7 +61,7 @@ class PeliculaCreateView(LoginRequiredMixin, TemplateView):
             try:
                 form.save()
                 messages.success(request, "Película creada con éxito.")  # Mensaje de éxito
-                return redirect('pelicula-create')  # Redirigir para limpiar el formulario
+                return redirect('mi_app:pelicula-create')  # Redirigir para limpiar el formulario
             except ValidationError as e:
                 error_message = e.message_dict.get('anio', ['Error inesperado'])[0]
                 messages.error(request, error_message)  # Mensaje de error
@@ -79,7 +79,7 @@ class PeliculaUpdateView(UpdateView):
     model = Pelicula
     form_class = PeliculaForm
     template_name = 'mi_app/crear_pelicula.html'
-    success_url = reverse_lazy('pelicula-list')
+    success_url = reverse_lazy('mi_app:pelicula-list')
 
     def form_valid(self, form):
         messages.success(self.request, "Película actualizada con éxito.")
@@ -95,4 +95,4 @@ class PeliculaDeleteView(DeleteView):
         mensaje = f"La película '{pelicula.titulo}' fue eliminada con éxito."
         pelicula.delete()  # Eliminar la película
         messages.success(request, mensaje)  # Agregar mensaje de éxito
-        return HttpResponseRedirect(reverse('pelicula-list'))  # Redirigir a la lista
+        return HttpResponseRedirect(reverse('mi_app:pelicula-list'))  # Redirigir a la lista

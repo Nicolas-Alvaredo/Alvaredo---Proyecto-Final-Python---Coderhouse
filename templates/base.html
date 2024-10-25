@@ -21,7 +21,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container-fluid"> <!-- Cambiado a container-fluid para usar más espacio -->
-            <a class="navbar-brand" href="{% url 'inicio' %}">Mi Sitio de Películas</a>
+            <a class="navbar-brand" href="{% url 'mi_app:inicio' %}">Mi Sitio de Películas</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded"
                     type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -31,25 +31,25 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item mx-1">
-                        <a class="nav-link py-2 px-2" href="{% url 'inicio' %}">Inicio</a>
+                        <a class="nav-link py-2 px-2" href="{% url 'mi_app:inicio' %}">Inicio</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item mx-1">
-                            <a class="nav-link py-2 px-2" href="{% url 'pelicula-create' %}">Crear Película</a>
+                            <a class="nav-link py-2 px-2" href="{% url 'mi_app:pelicula-create' %}">Crear Película</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="nav-link py-2 px-2" href="{% url 'pelicula-list' %}">Buscar Películas</a>
+                            <a class="nav-link py-2 px-2" href="{% url 'mi_app:pelicula-list' %}">Buscar Películas</a>
                         </li>
                     {% endif %}
                     <li class="nav-item mx-1">
-                        <a class="nav-link py-2 px-2" href="{% url 'acerca_de_mi' %}">Acerca de</a>
+                        <a class="nav-link py-2 px-2" href="{% url 'mi_app:acerca_de_mi' %}">Acerca de</a>
                     </li>
                 </ul>
     
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
                         <li class="nav-item d-flex align-items-center mx-2">
-                            <a class="nav-link d-flex align-items-center" href="{% url 'editar_perfil' %}">
+                            <a class="nav-link d-flex align-items-center" href="{% url 'login:editar_perfil' %}">
                                 {% if user.datosextra.avatar %}
                                     <img src="{{ user.datosextra.avatar.url }}" alt="Avatar"
                                          class="rounded-circle me-2" height="30" width="30">
@@ -58,17 +58,17 @@
                             </a>
                         </li>
                         <li class="nav-item mx-1">
-                            <form method="POST" action="{% url 'logout' %}">
+                            <form method="POST" action="{% url 'login:logout' %}">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger nav-link px-3 py-2">Cerrar Sesión</button>
                             </form>
                         </li>
                     {% else %}
                         <li class="nav-item mx-1">
-                            <a class="btn btn-primary nav-link px-3 py-2" href="{% url 'login' %}">Iniciar Sesión</a>
+                            <a class="btn btn-primary nav-link px-3 py-2" href="{% url 'login:login' %}">Iniciar Sesión</a>
                         </li>
                         <li class="nav-item mx-1">
-                            <a class="btn btn-success nav-link px-3 py-2" href="{% url 'register' %}">Registrarse</a>
+                            <a class="btn btn-success nav-link px-3 py-2" href="{% url 'login:register' %}">Registrarse</a>
                         </li>
                     {% endif %}
                 </ul>

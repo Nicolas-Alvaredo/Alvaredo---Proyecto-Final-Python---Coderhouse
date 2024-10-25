@@ -1,6 +1,9 @@
 from django.urls import path
 from .views import RegisterView, CustomLoginView, CustomLogoutView, EditarPerfilView, CambiarPasswordView
 
+# Namespace de la app
+app_name = "login"
+
 urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),

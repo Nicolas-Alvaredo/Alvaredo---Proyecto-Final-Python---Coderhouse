@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Pelicula
+
+# Registramos el modelo directamente
+admin.site.register(Pelicula)

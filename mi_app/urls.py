@@ -4,6 +4,9 @@ from .views import (
     PeliculaUpdateView, PeliculaDeleteView, InicioView, AcercaDeMiView
 )
 
+# Namespace de la app
+app_name = "mi_app"
+
 urlpatterns = [
     path('', InicioView.as_view(), name='inicio'),  # Inicio
     path('acerca-de-mi/', AcercaDeMiView.as_view(), name='acerca_de_mi'),  # Acerca de mí

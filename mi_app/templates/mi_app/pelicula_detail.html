@@ -6,7 +6,7 @@
     <h2>{{ pelicula.titulo }}</h2>
     <p><strong>Género:</strong> {{ pelicula.genero }}</p>
     <p><strong>Año:</strong> {{ pelicula.anio }}</p>
-    <a href="{% url 'pelicula-update' pelicula.pk %}" class="btn btn-primary">Editar</a>
-    <a href="{% url 'pelicula-delete' pelicula.pk %}" class="btn btn-danger">Eliminar</a>
-    <a href="{% url 'pelicula-list' %}" class="btn btn-secondary">Volver al listado</a>
+    <a href="{% url 'mi_app:pelicula-update' pelicula.pk %}" class="btn btn-primary">Editar</a>
+    <a href="{% url 'mi_app:pelicula-delete' pelicula.pk %}" class="btn btn-danger">Eliminar</a>
+    <a href="{% url 'mi_app:pelicula-list' %}" class="btn btn-secondary">Volver al listado</a>
 {% endblock %}
