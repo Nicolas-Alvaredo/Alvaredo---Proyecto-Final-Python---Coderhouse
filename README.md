@@ -28,6 +28,10 @@ python -m venv .venv
 .venv/Scripts/activate
 ```
 
+```bash
+source .venv/Scripts/activate
+```
+
 ### 2. Instalar las dependencias
 
 Instala todas las dependencias necesarias para ejecutar la aplicación:
@@ -66,3 +70,7 @@ Crear Pelicula
 Buscar Pelicula
 
 Acerca de mi
+
+Logeo/Registro de users
+
+Manejo de Avatars

@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Crear Película{% endblock %}
+{% block title %}
+    {% if form.instance.pk %}
+        Editar Película
+    {% else %}
+        Crear Nueva Película
+    {% endif %}
+{% endblock %}
 
 {% block content %}
 
@@ -26,8 +32,16 @@
         {% endfor %}
     {% endif %}
 
-    <h2>Crear Nueva Película</h2>
-    <form method="POST">
+    <!-- Encabezado dinámico -->
+    <h2>
+        {% if form.instance.pk %}
+            Editar Película
+        {% else %}
+            Crear Nueva Película
+        {% endif %}
+    </h2>
+
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
             <label for="titulo" class="form-label">Título:</label>
@@ -38,11 +52,24 @@
             {{ form.genero }}
         </div>
         <div class="mb-3">
+            <label for="fecha_lanzamiento" class="form-label">Fecha de Lanzamiento:</label>
+            {{ form.fecha_lanzamiento }}
+        </div>       
+        <div class="mb-3">
             <label for="anio" class="form-label">Año:</label>
             {{ form.anio }}
         </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            {{ form.descripcion }}
+        </div>
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen:</label>
+            {{ form.imagen }}
+        </div>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </form>
+    
 
     <!-- Script para desaparecer los mensajes después de 2 segundos -->
     <script>

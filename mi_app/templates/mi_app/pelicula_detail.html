@@ -5,7 +5,14 @@
 {% block content %}
     <h2>{{ pelicula.titulo }}</h2>
     <p><strong>Género:</strong> {{ pelicula.genero }}</p>
+    <p><strong>Fecha de Lanzamiento:</strong> {{ pelicula.fecha_lanzamiento }}</p>
     <p><strong>Año:</strong> {{ pelicula.anio }}</p>
+    <p><strong>Descripción:</strong> {{ pelicula.descripcion }}</p>
+    
+    {% if pelicula.imagen %}
+        <img src="{{ pelicula.imagen.url }}" alt="{{ pelicula.titulo }}" style="max-width:300px;">
+    {% endif %}
+    
     <a href="{% url 'mi_app:pelicula-update' pelicula.pk %}" class="btn btn-primary">Editar</a>
     <a href="{% url 'mi_app:pelicula-delete' pelicula.pk %}" class="btn btn-danger">Eliminar</a>
     <a href="{% url 'mi_app:pelicula-list' %}" class="btn btn-secondary">Volver al listado</a>

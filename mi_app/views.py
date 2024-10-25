@@ -56,21 +56,19 @@ class PeliculaCreateView(LoginRequiredMixin, TemplateView):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = PeliculaForm(request.POST)
+        form = PeliculaForm(request.POST, request.FILES)  # Aceptar archivos y datos
         if form.is_valid():
             try:
                 form.save()
-                messages.success(request, "Película creada con éxito.")  # Mensaje de éxito
-                return redirect('mi_app:pelicula-create')  # Redirigir para limpiar el formulario
+                messages.success(request, "Película creada con éxito.")
+                return redirect('mi_app:pelicula-create')
             except ValidationError as e:
                 error_message = e.message_dict.get('anio', ['Error inesperado'])[0]
-                messages.error(request, error_message)  # Mensaje de error
-
+                messages.error(request, error_message)
         else:
-            # Agregar errores del formulario a los mensajes de error
             for field, errors in form.errors.items():
                 for error in errors:
-                    messages.error(request, error)  # Mostrar cada error como un mensaje separado
+                    messages.error(request, error)
 
         return render(request, self.template_name, {'form': form})
 
