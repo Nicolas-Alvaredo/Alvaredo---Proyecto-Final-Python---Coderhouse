@@ -5,6 +5,27 @@
 {% block content %}
     <h2>Perfil de {{ perfil.user.username }}</h2>
 
+    <!-- Mostrar mensajes de éxito -->
+    {% if messages %}
+        {% for message in messages %}
+            <div id="success-message" class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Script para ocultar el mensaje después de 2 segundos -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var successMessage = document.getElementById('success-message');
+            if (successMessage) {
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 2000);
+            }
+        });
+    </script>
+
     <p><strong>Email:</strong> {{ perfil.user.email }}</p>
     <p><strong>Nombre:</strong> {{ perfil.user.first_name }}</p>
     <p><strong>Apellido:</strong> {{ perfil.user.last_name }}</p>

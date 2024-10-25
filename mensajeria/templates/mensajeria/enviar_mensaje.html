@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Enviar Mensaje{% endblock %}
+
+{% block content %}
+<h2>Enviar Mensaje</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="destinatario" class="form-label">Destinatario:</label>
+        {{ form.destinatario }}
+    </div>
+    <div class="mb-3">
+        <label for="contenido" class="form-label">Mensaje:</label>
+        {{ form.contenido }}
+    </div>
+
+    <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-success">Enviar</button>
+        <a href="{% url 'mensajeria:ver_mensajes' %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success mt-3" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}

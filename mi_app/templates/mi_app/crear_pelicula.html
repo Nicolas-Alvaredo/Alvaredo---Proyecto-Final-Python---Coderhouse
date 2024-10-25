@@ -32,7 +32,6 @@
         {% endfor %}
     {% endif %}
 
-    <!-- Encabezado dinámico -->
     <h2>
         {% if form.instance.pk %}
             Editar Película
@@ -41,44 +40,53 @@
         {% endif %}
     </h2>
 
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" class="p-4 shadow-sm bg-light rounded">
         {% csrf_token %}
+
         <div class="mb-3">
             <label for="titulo" class="form-label">Título:</label>
             {{ form.titulo }}
         </div>
+
         <div class="mb-3">
             <label for="genero" class="form-label">Género:</label>
             {{ form.genero }}
         </div>
+
         <div class="mb-3">
             <label for="fecha_lanzamiento" class="form-label">Fecha de Lanzamiento:</label>
             {{ form.fecha_lanzamiento }}
-        </div>       
+        </div>
+
         <div class="mb-3">
             <label for="anio" class="form-label">Año:</label>
             {{ form.anio }}
         </div>
+
         <div class="mb-3">
             <label for="descripcion" class="form-label">Descripción:</label>
             {{ form.descripcion }}
         </div>
+
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen:</label>
             {{ form.imagen }}
         </div>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
-    
 
-    <!-- Script para desaparecer los mensajes después de 2 segundos -->
+        <!-- Botones alineados horizontalmente -->
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{% url 'mi_app:pelicula-list' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+
     <script>
         setTimeout(function () {
             var successMessage = document.getElementById('success-message');
             var errorMessage = document.getElementById('error-message');
             if (successMessage) successMessage.style.display = 'none';
             if (errorMessage) errorMessage.style.display = 'none';
-        }, 2000);  // 2 segundos
+        }, 2000);
     </script>
 
 {% endblock %}

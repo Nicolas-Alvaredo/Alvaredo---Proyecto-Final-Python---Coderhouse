@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import DatosExtra
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 
 # Vista de registro usando CBV
@@ -64,9 +65,9 @@ class EditarPerfilView(LoginRequiredMixin, UpdateView):
 # Vista para cambiar contraseña usando CBV
 class CambiarPasswordView(LoginRequiredMixin, PasswordChangeView):
     template_name = 'login/cambiar_password.html'
-    success_url = reverse_lazy('login:ver_perfil')  # Redirigir al inicio
+    success_url = reverse_lazy('login:ver_perfil')  # Redirigir al perfil
 
     def form_valid(self, form):
-        """Envía mensaje de éxito y redirige al inicio."""
+        """Envía mensaje de éxito y redirige al perfil."""
         messages.success(self.request, '¡Contraseña cambiada exitosamente!')
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())  # Redirige a perfil con mensaje

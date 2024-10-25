@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mi_app.urls')),  # Rutas de la app principal
     path('accounts/', include('login.urls')),  # Rutas para login/logout/register
+    path('mensajeria/', include('mensajeria.urls')), # Rutas de la app de mensajeria
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

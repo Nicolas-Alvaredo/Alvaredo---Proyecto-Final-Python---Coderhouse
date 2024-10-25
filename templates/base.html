@@ -48,6 +48,12 @@
     
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
+                    <li class="nav-item mx-2 d-flex align-items-center">
+                        <!-- Ícono del sobre -->
+                        <a href="{% url 'mensajeria:ver_mensajes' %}" class="nav-link mensaje-icono position-relative">
+                            <i class="fas fa-envelope fa-lg"></i> <!-- Ícono del sobre -->
+                        </a>
+                    </li>
                         <li class="nav-item d-flex align-items-center mx-2">
                             <a class="nav-link d-flex align-items-center" href="{% url 'login:ver_perfil' %}">
                                 {% if user.datosextra.avatar %}
