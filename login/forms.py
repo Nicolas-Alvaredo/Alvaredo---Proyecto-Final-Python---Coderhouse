@@ -23,18 +23,23 @@ class EditarPerfilForm(UserChangeForm):
     last_name = forms.CharField(required=True, max_length=30)
     avatar = forms.ImageField(
         required=False,
-        widget=forms.FileInput(attrs={'class': 'form-control'})
+        widget=forms.ClearableFileInput(attrs={'class': 'form-control'}),
+        label="Avatar"
+    )
+    clear_avatar = forms.BooleanField(
+        required=False,
+        label="Eliminar Avatar"
     )
     fecha_nacimiento = forms.DateField(
         required=False,
-        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'})
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
     )
     biografia = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control'}),
         required=False
     )
 
-    password = None  # Ocultar campo de contraseña
+    password = None  # Ocultar el campo de contraseña
 
     class Meta:
         model = User
@@ -65,6 +70,17 @@ class EditarPerfilForm(UserChangeForm):
 
         # Guardar datos adicionales en DatosExtra
         datos_extra, _ = DatosExtra.objects.get_or_create(user=user)
+
+        if self.cleaned_data.get('clear_avatar'):
+            # Si se seleccionó "Eliminar Avatar", borrar el avatar
+            datos_extra.avatar.delete(save=False)
+            datos_extra.avatar = None
+        else:
+            # Si se proporcionó un nuevo avatar, guardarlo
+            avatar = self.cleaned_data.get('avatar')
+            if avatar:
+                datos_extra.avatar = avatar
+
         datos_extra.fecha_nacimiento = self.cleaned_data.get('fecha_nacimiento')
         datos_extra.biografia = self.cleaned_data.get('biografia')
 
