@@ -63,16 +63,35 @@ python manage.py runserver
 
 ### 5. Funcionalidades principales
 
-Inicio
+1. **Inicio**  
+   Página principal que da la bienvenida al usuario con un resumen del sitio y opciones de navegación.
 
-Crear Pelicula
+2. **Crear Película**  
+   - Permite a los usuarios registrados añadir nuevas películas a la base de datos.  
+   - Incluye campos como título, género, año, descripción, fecha de lanzamiento y una imagen de la película.  
 
-Buscar Pelicula
+3. **Buscar Películas**  
+   - Opción para que los usuarios filtren películas por **título, género o año**.  
+   - Presenta un listado dinámico con las películas disponibles que coinciden con los filtros.
 
-Acerca de mi
+4. **Detalles de Películas**  
+   - Muestra la información completa de una película seleccionada, incluyendo su descripción y una imagen, si está disponible.  
+   - Los usuarios pueden acceder a las opciones de **editar** o **eliminar** películas.
 
-Logeo/Registro de users
+5. **Logeo / Registro de Usuarios**  
+   - Permite a los usuarios registrarse e iniciar sesión.  
+   - La autenticación es necesaria para realizar acciones específicas como **crear, editar o eliminar películas** y para acceder a la **mensajería entre usuarios**.
 
-Manejo de Avatars
+6. **Gestión de Perfiles y Avatares**  
+   - Los usuarios pueden **editar su perfil**, actualizando información como nombre, apellido y correo electrónico.  
+   - **Gestión de avatares**: cada usuario puede subir una imagen personalizada para su perfil y cambiarla en cualquier momento.  
+   - Opción para **borrar el avatar** en caso de querer restablecerlo.
 
-Mensajeria entre users
+7. **Mensajería entre Usuarios**  
+   - Sistema de **mensajería interna** que permite a los usuarios enviarse mensajes entre sí.  
+   - **Notificaciones visuales**: se muestra un ícono de sobre en la barra de navegación, que permite acceder a los mensajes recibidos y enviados.  
+   - Los mensajes se muestran en un listado con la opción de **eliminar** mensajes individuales.  
+   - **Validación**: solo los usuarios autenticados pueden enviar y recibir mensajes.
+
+8. **Página Acerca de Mí**  
+   Sección estática que proporciona información sobre el proyecto y el equipo de desarrollo, o puede usarse para mostrar información general del sitio.
