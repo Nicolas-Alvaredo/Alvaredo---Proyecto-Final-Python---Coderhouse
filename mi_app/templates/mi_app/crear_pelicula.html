@@ -70,8 +70,20 @@
 
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen:</label>
-            {{ form.imagen }}
+        
+            {% if form.instance.imagen %}
+                <p>
+                    <a href="{{ form.instance.imagen.url }}" target="_blank">{{ form.instance.imagen.name }}</a>
+                </p>
+                <div class="form-check mt-2">
+                    <input type="checkbox" class="form-check-input" name="imagen-clear" id="imagen-clear">
+                    <label class="form-check-label" for="imagen-clear">Eliminar Imagen</label>
+                </div>
+            {% endif %}
+        
+            <input type="file" name="imagen" id="imagen" class="form-control mt-2">
         </div>
+        
 
         <!-- Botones alineados horizontalmente -->
         <div class="d-flex gap-2 mt-3">

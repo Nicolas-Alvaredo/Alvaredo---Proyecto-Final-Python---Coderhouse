@@ -80,8 +80,15 @@ class PeliculaUpdateView(UpdateView):
     success_url = reverse_lazy('mi_app:pelicula-list')
 
     def form_valid(self, form):
+        # Verificamos si se seleccionó "Eliminar Imagen"
+        if self.request.POST.get('imagen-clear'):
+            form.instance.imagen.delete()  # Eliminar imagen del sistema de archivos
+            form.instance.imagen = None  # Limpiar el campo en la base de datos
         messages.success(self.request, "Película actualizada con éxito.")
         return super().form_valid(form)
+
+
+
 
 # Eliminar Peliculas CBV
 class PeliculaDeleteView(DeleteView):

@@ -8,13 +8,6 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-
-    <!-- Checkbox para eliminar avatar -->
-    <div class="form-check mb-3">
-        {{ form.clear_avatar }}
-        <label class="form-check-label" for="id_clear_avatar">Eliminar Avatar</label>
-    </div>
-
     <div class="d-flex gap-2 mt-3">
         <button type="submit" class="btn btn-success">Guardar Cambios</button>
         <a href="{% url 'login:cambiar_password' %}" class="btn btn-warning">Cambiar Contraseña</a>

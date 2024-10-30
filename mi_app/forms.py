@@ -9,6 +9,15 @@ class PeliculaForm(forms.ModelForm):
         })
     )
 
+    imagen = forms.ImageField(
+        required=False,
+        widget=forms.ClearableFileInput(attrs={
+            'class': 'form-control',
+            'style': 'display: none;'  # Ocultamos la interfaz predeterminada.
+        }),
+        label=''
+    )
+
     class Meta:
         model = Pelicula
         fields = ['titulo', 'genero', 'fecha_lanzamiento', 'anio', 'descripcion', 'imagen']

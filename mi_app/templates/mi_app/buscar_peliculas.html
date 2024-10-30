@@ -34,16 +34,27 @@
     </form>
 
     <h3>Resultados:</h3>
-    <ul>
+    <ul class="list-group">
         {% for pelicula in peliculas %}
-            <li>
-                {{ pelicula.titulo }} ({{ pelicula.anio }}) 
-                <a href="{% url 'mi_app:pelicula-detail' pelicula.pk %}">Ver más</a> |
-                <a href="{% url 'mi_app:pelicula-update' pelicula.pk %}">Editar</a> |
-                <a href="{% url 'mi_app:pelicula-delete' pelicula.pk %}">Eliminar</a>
+            <li class="list-group-item d-flex align-items-center">
+                <!-- Mostrar imagen si existe -->
+                {% if pelicula.imagen %}
+                    <div class="me-3" style="width: 70px; height: 100px; overflow: hidden;">
+                        <img src="{{ pelicula.imagen.url }}" alt="{{ pelicula.titulo }}" 
+                             class="img-fluid rounded" style="object-fit: cover; width: 100%; height: 100%;">
+                    </div>
+                {% endif %}
+                <div class="d-flex flex-column">
+                    <span><strong>{{ pelicula.titulo }}</strong> ({{ pelicula.anio }})</span>
+                    <div>
+                        <a href="{% url 'mi_app:pelicula-detail' pelicula.pk %}">Ver más</a> |
+                        <a href="{% url 'mi_app:pelicula-update' pelicula.pk %}">Editar</a> |
+                        <a href="{% url 'mi_app:pelicula-delete' pelicula.pk %}">Eliminar</a>
+                    </div>
+                </div>
             </li>
         {% empty %}
-            <li>No se encontraron resultados</li>
+            <li class="list-group-item">No se encontraron resultados</li>
         {% endfor %}
     </ul>
 
