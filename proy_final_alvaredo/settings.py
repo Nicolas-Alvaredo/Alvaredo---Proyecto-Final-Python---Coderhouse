@@ -25,15 +25,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9n8uk^^s52o^0m9^497=pps$ui-plzmc1buqngyki8j%#f@_42'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
+# Dominio de Railway
 ALLOWED_HOSTS = [
     'alvaredo-proyfinal-python-coder-production.up.railway.app',  # Dominio de Railway
     'localhost',  # Desarrollo local 
     '127.0.0.1'  # También incluye 127.0.0.1 si accedes al localhost de esta forma
 ]
 
-
+# Dominio de Railway
+CSRF_TRUSTED_ORIGINS = [
+    'https://alvaredo-proyfinal-python-coder-production.up.railway.app',
+]
 
 
 # Application definition
