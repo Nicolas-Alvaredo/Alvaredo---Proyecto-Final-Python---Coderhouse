@@ -27,7 +27,12 @@ SECRET_KEY = 'django-insecure-9n8uk^^s52o^0m9^497=pps$ui-plzmc1buqngyki8j%#f@_42
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'alvaredo-proyfinal-python-coder-production.up.railway.app',  # Dominio de Railway
+    'localhost',  # Para desarrollo local
+    '127.0.0.1'  # También incluye 127.0.0.1 si accedes al localhost de esta forma
+]
+
 
 
 
