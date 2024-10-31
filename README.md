@@ -2,6 +2,10 @@
 
 Este es un proyecto básico hecho en Django que permite gestionar una base de datos de películas. Puedes crear, buscar y listar películas. El proyecto usa Bootstrap para la interfaz visual y está preparado para ejecutarse en un entorno local.
 
+## Video Explicativo
+
+[Video Explicativo](https://drive.google.com/file/d/1Iz1lFIPH5xGqPRAq9VemCxkdoRDXBB1ze/view?usp=drive_link)
+
 ## Requisitos
 
 Antes de empezar, asegúrate de tener instalado lo siguiente:
