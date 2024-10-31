@@ -4,7 +4,7 @@ Este es un proyecto básico hecho en Django que permite gestionar una base de da
 
 ## Video Explicativo
 
-[https://drive.google.com/file/d/1Iz1lFIPH5xGqPRAq9VemCxkdoRDXBB1ze/view?usp=drive_link]
+[Link](https://drive.google.com/file/d/1zlF1FPH5xGqPR4q9VemCvkdoRDXBB1ze/view?usp=drive_link)
 
 ## Requisitos
 
