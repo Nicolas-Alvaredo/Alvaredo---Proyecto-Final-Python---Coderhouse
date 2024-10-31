@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-9n8uk^^s52o^0m9^497=pps$ui-plzmc1buqngyki8j%#f@_42
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['alvaredo-proyecto-final-python-coderhouse.onrender.com','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 
 
@@ -85,6 +85,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
