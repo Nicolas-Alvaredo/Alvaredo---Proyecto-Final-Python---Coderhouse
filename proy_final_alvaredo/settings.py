@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'alvaredo-proyfinal-python-coder-production.up.railway.app',  # Dominio de Railway
-    'localhost',  # Para desarrollo local 
+    'localhost',  # Desarrollo local 
     '127.0.0.1'  # También incluye 127.0.0.1 si accedes al localhost de esta forma
 ]
 
