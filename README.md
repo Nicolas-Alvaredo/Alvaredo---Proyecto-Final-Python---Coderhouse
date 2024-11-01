@@ -4,7 +4,7 @@ Este es un proyecto básico hecho en Django que permite gestionar una base de da
 
 ## Deploy
 
-[Railway Drive](https://alvaredo-proyfinal-python-coder-production.up.railway.app/)
+[Railway Link](https://alvaredo-proyfinal-python-coder-production.up.railway.app/)
 
 ## Video Explicativo
 
