@@ -2,9 +2,13 @@
 
 Este es un proyecto básico hecho en Django que permite gestionar una base de datos de películas. Puedes crear, buscar y listar películas. El proyecto usa Bootstrap para la interfaz visual y está preparado para ejecutarse en un entorno local.
 
+## Deploy
+
+[Railway Drive](https://alvaredo-proyfinal-python-coder-production.up.railway.app/)
+
 ## Video Explicativo
 
-[Link](https://drive.google.com/file/d/1zlF1FPH5xGqPR4q9VemCvkdoRDXBB1ze/view?usp=drive_link)
+[Drive Link](https://drive.google.com/file/d/1zlF1FPH5xGqPR4q9VemCvkdoRDXBB1ze/view?usp=drive_link)
 
 ## Requisitos
 
