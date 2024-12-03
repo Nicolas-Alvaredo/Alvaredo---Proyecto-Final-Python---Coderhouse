@@ -68,7 +68,7 @@ python manage.py runserver
 ### 5. Main Features
 
 1. **Home**  
-   The main page welcomes the user with a site summary and navigation options.
+   - The main page welcomes the user with a site summary and navigation options.
 
 2. **Add Movie**  
    - Allows registered users to add new movies to the database.  
@@ -98,4 +98,4 @@ python manage.py runserver
    - **Validation**: only authenticated users can send and receive messages.
 
 8. **About Me Page**  
-   A static section providing information about the project and the development team, or it can be used to display general site information.
+   - A static section providing information about the project and the development team, or it can be used to display general site information.
