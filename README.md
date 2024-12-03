@@ -1,30 +1,26 @@
-# Proyecto Django de Películas
+# Django Movie Project
 
-Este es un proyecto básico hecho en Django que permite gestionar una base de datos de películas. Puedes crear, buscar y listar películas. El proyecto usa Bootstrap para la interfaz visual y está preparado para ejecutarse en un entorno local.
+This is a basic project built with Django to manage a movie database. It allows you to create, search, and list movies. The project uses Bootstrap for the visual interface and is ready to run in a local environment.
 
 ## Deploy
 
 [Railway Link](https://alvaredo-proyfinal-python-coder-production.up.railway.app/)
 
-## Video Explicativo
+## Requirements
 
-[Drive Link](https://drive.google.com/file/d/1zlF1FPH5xGqPR4q9VemCvkdoRDXBB1ze/view?usp=drive_link)
-
-## Requisitos
-
-Antes de empezar, asegúrate de tener instalado lo siguiente:
+Before starting, make sure you have the following installed:
 
 - Python 3.x
 - pip (gestor de paquetes de Python)
 - Django (se instalará automáticamente)
 
-## Instrucciones de instalación y uso
+## Installation and Usage Instructions
 
-### 1. Crear y activar el entorno virtual
+### 1. Create and Activate the Virtual Environment
 
-Es recomendable trabajar en un entorno virtual para evitar conflictos con otras dependencias.
+It is recommended to work in a virtual environment to avoid conflicts with other dependencies.
 
-En **Windows**:
+On **Windows**:
 
 bash
 
@@ -40,17 +36,17 @@ python -m venv .venv
 source .venv/Scripts/activate
 ```
 
-### 2. Instalar las dependencias
+### 2. Install Dependencies
 
-Instala todas las dependencias necesarias para ejecutar la aplicación:
+Install all the necessary dependencies to run the application:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Migrar la base de datos
+### 3. Migrate the Database
 
-Django necesita crear las tablas necesarias en la base de datos. Ejecuta los siguientes comandos:
+Django needs to create the necessary tables in the database. Run the following commands:
 
 ```bash
 python manage.py makemigrations
@@ -61,45 +57,45 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 4. Ejecutar el servidor
+### 4. Run the Server
 
-Inicia el servidor de desarrollo de Django:
+Start the Django development server:
 
 ```bash
 python manage.py runserver
 ```
 
-### 5. Funcionalidades principales
+### 5. Main Features
 
-1. **Inicio**  
-   Página principal que da la bienvenida al usuario con un resumen del sitio y opciones de navegación.
+1. **Home**  
+   The main page welcomes the user with a site summary and navigation options.
 
-2. **Crear Película**  
-   - Permite a los usuarios registrados añadir nuevas películas a la base de datos.  
-   - Incluye campos como título, género, año, descripción, fecha de lanzamiento y una imagen de la película.  
+2. **Add Movie**  
+   - Allows registered users to add new movies to the database.  
+   - Includes fields such as title, genre, year, description, release date, and a movie image.  
 
-3. **Buscar Películas**  
-   - Opción para que los usuarios filtren películas por **título, género o año**.  
-   - Presenta un listado dinámico con las películas disponibles que coinciden con los filtros.
+3. **Search Movies**  
+   - Provides an option for users to filter movies by **title, genre, or year**.  
+   - Displays a dynamic list of available movies matching the filters.
 
-4. **Detalles de Películas**  
-   - Muestra la información completa de una película seleccionada, incluyendo su descripción y una imagen, si está disponible.  
-   - Los usuarios pueden acceder a las opciones de **editar** o **eliminar** películas.
+4. **Movie Details**  
+   - Displays complete information about a selected movie, including its description and an image (if available). 
+   - Users can access **edit** or **delete** options for movies.
 
-5. **Logeo / Registro de Usuarios**  
-   - Permite a los usuarios registrarse e iniciar sesión.  
-   - La autenticación es necesaria para realizar acciones específicas como **crear, editar o eliminar películas** y para acceder a la **mensajería entre usuarios**.
+5. **User Login / Registration**  
+   - Allows users to register and log in.  
+   - Authentication is required for specific actions like **creating, editing, or deleting movies** and accessing **user messaging**.
 
-6. **Gestión de Perfiles y Avatares**  
-   - Los usuarios pueden **editar su perfil**, actualizando información como nombre, apellido y correo electrónico.  
-   - **Gestión de avatares**: cada usuario puede subir una imagen personalizada para su perfil y cambiarla en cualquier momento.  
-   - Opción para **borrar el avatar** en caso de querer restablecerlo.
+6. **Profile and Avatar Management**  
+   - Users can **edit their profile**, updating information such as first name, last name, and email address. 
+   - **Avatar management**: each user can upload a custom profile image and change it at any time.  
+   - Option to **delete the avatar** if the user wants to reset it.
 
-7. **Mensajería entre Usuarios**  
-   - Sistema de **mensajería interna** que permite a los usuarios enviarse mensajes entre sí.  
-   - **Notificaciones visuales**: se muestra un ícono de sobre en la barra de navegación, que permite acceder a los mensajes recibidos y enviados.  
-   - Los mensajes se muestran en un listado con la opción de **eliminar** mensajes individuales.  
-   - **Validación**: solo los usuarios autenticados pueden enviar y recibir mensajes.
+7. **User Messaging**  
+   - An **internal messaging system** allows users to send messages to each other.  
+   - **Visual notifications**: an envelope icon in the navigation bar provides access to received and sent messages..  
+   - Messages are displayed in a list with the option to **delete** individual messages. 
+   - **Validation**: only authenticated users can send and receive messages.
 
-8. **Página Acerca de Mí**  
-   Sección estática que proporciona información sobre el proyecto y el equipo de desarrollo, o puede usarse para mostrar información general del sitio.
+8. **About Me Page**  
+   A static section providing information about the project and the development team, or it can be used to display general site information.
